@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pago_movil_bdv/utils/save_contact.dart';
+import 'package:pago_movil_bdv/utils/list_contact.dart';
+import 'package:pago_movil_bdv/pages/contact_list.dart';
 
 
 class AddNameContact extends StatefulWidget {
@@ -17,7 +19,6 @@ class _AddNameContactState extends State<AddNameContact> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    print(widget.data);
   }
 
   @override
@@ -54,8 +55,13 @@ class _AddNameContactState extends State<AddNameContact> {
                     color: Colors.redAccent,
                     child: Text('Guardar', style: TextStyle(color: Colors.white),),
                     onPressed: () {
-
                       save_contact(codeBank: widget.data['codeBank'], codeMobile: widget.data['codeMobile'], mobile: widget.data['mobile'], dni: widget.data['dni'], name: _nameController.text);
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  ContactList(list_contact())
+                          ));
                     },
                   ),
                 ),
