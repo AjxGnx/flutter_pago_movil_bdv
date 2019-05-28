@@ -51,6 +51,9 @@ class DatabaseClient {
       contacts.add(contact);
     });
 
+
     return contacts;
   }
+
 }
+
