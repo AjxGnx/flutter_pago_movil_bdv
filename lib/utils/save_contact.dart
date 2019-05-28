@@ -17,7 +17,7 @@ void save_contact({String codeBank, String codeMobile, String mobile, String dni
     Future<List<ContactModel>> latestContacts =  db.fetchLatestContact();
 
     latestContacts.then((dd){
-      print(dd.first.toMap());
+      print(dd.toList());
     });
   });
 
