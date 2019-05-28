@@ -14,11 +14,6 @@ void save_contact({String codeBank, String codeMobile, String mobile, String dni
     db.upsertContact(contact).then((ContactModel contact){
     });
 
-    Future<List<ContactModel>> latestContacts =  db.fetchLatestContact();
-
-    latestContacts.then((dd){
-      print(dd.toList());
-    });
   });
 
 }

@@ -6,7 +6,7 @@ list_contact(){
   final DatabaseClient db = DatabaseClient();
   return db.create().then((data) async{
 
-    List<ContactModel> latestContacts =  await db.fetchLatestContact();
+    List<ContactModel> latestContacts =  await db.getContact();
     return (latestContacts);
     });
   }
