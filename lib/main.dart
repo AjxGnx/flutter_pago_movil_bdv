@@ -24,9 +24,16 @@ class _HomeState extends State<Home> {
   String _codeMobile = null;
   TextEditingController _mobileController = TextEditingController();
   TextEditingController _dniController = TextEditingController();
-
+  final snackBar = SnackBar(
+    content: Text('Pago Enviado con Exito'),
+    duration: Duration(seconds: 5),
+  );
 
   void _valueChanged(bool value) => setState(() => _chexbox = value);
+
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
+
 
 
   @override
@@ -41,7 +48,9 @@ class _HomeState extends State<Home> {
         .height;
 
 
+
     return Scaffold(
+      key: _scaffoldKey,
         appBar: AppBar(
           title: Text('Pago Clave BDV'),
         ),
@@ -84,7 +93,6 @@ class _HomeState extends State<Home> {
                                 color: Colors.redAccent,
                               ),
                               onPressed: () {
-                                print(list_contact());
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -194,6 +202,8 @@ class _HomeState extends State<Home> {
                                             'mobile': _mobileController.text,
                                             'dni': _dniController.text,
                                           })));
+                            }else{
+                              _scaffoldKey.currentState.showSnackBar(snackBar);
                             }
                           },
                         ),
