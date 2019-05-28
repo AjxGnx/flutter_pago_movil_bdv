@@ -17,7 +17,7 @@ class ContactItem extends StatelessWidget {
         child: Text(_contact.name[0]),
       ),
       title: Text(_contact.name),
-      subtitle: Text(_contact.codeBank+' '+ _contact.phone+' '+ _contact.dni),
+      subtitle: Text(_contact.codeBank+'  '+ _contact.phone+'  '+ _contact.dni),
     );
   }
 }

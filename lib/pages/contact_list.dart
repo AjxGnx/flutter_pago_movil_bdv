@@ -35,18 +35,17 @@ class ContactList extends StatelessWidget {
   }
   Widget createListView(BuildContext context, AsyncSnapshot snapshot) {
     List<ContactModel> values = snapshot.data;
+    print(values);
     List<ContactItem> _buildContactList(){
+
       return values
-          .map((contact) => ContactItem(contact))
-          .toList();
+          .map((contact) => ContactItem(contact)).toList();
 
     }
     return new ListView.builder(
       itemCount: values.length,
       itemBuilder: (BuildContext context, int index) {
-        return new Column(
-          children: _buildContactList(),
-        );
+        return ContactItem(values[index]);
       },
     );
   }
