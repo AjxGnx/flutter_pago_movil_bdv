@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:pago_movil_bdv/data/bank_code.dart';
 import 'package:pago_movil_bdv/data/mobile_code.dart';
 import 'package:pago_movil_bdv/pages/add_name_contact.dart';
+import 'package:pago_movil_bdv/pages/contact_list.dart';
+import 'package:pago_movil_bdv/utils/list_contact.dart';
 
 void main() {
   runApp(
@@ -17,7 +19,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  bool _chexbox = true;
+  bool _chexbox = false;
   String _codeBank = null;
   String _codeMobile = null;
   TextEditingController _mobileController = TextEditingController();
@@ -81,7 +83,15 @@ class _HomeState extends State<Home> {
                                 Icons.contacts,
                                 color: Colors.redAccent,
                               ),
-                              onPressed: () {},
+                              onPressed: () {
+                                print(list_contact());
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            ContactList(list_contact())
+                                        ));
+                              },
                             ),
                           )
                         ],
