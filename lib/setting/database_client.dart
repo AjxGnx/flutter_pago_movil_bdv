@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:io';
-import 'package:flutter/foundation.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path_provider/path_provider.dart';
@@ -42,7 +41,7 @@ class DatabaseClient {
     return contact;
   }
 
-  Future<List<ContactModel>> fetchLatestContact() async {
+  Future<List<ContactModel>> getContact() async {
     List<Map> results = await _db.query("contact", columns: ContactModel.columns, orderBy: "id DESC");
 
     List<ContactModel> contacts = new List();
@@ -53,6 +52,10 @@ class DatabaseClient {
 
 
     return contacts;
+  }
+
+  Future<int> deleteContact() async {
+    return await _db.rawDelete('DELETE FROM contact');
   }
 
 }
