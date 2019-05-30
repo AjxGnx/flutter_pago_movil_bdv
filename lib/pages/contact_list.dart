@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:pago_movil_bdv/models/Contact.dart';
 import 'package:pago_movil_bdv/pages/contact_item.dart';
 import 'package:pago_movil_bdv/utils/list_contact.dart';
+import 'package:pago_movil_bdv/main.dart';
 
 class ContactList extends StatelessWidget {
-  final Future<List<ContactModel>> _contacts;
-  ContactList(this._contacts);
+
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +16,7 @@ class ContactList extends StatelessWidget {
         switch (snapshot.connectionState) {
           case ConnectionState.none:
           case ConnectionState.waiting:
-            return new Text('loading...');
+            return new Text('Cargando...');
           default:
             if (snapshot.hasError)
               return new Text('Error: ${snapshot.error}');
@@ -29,13 +29,23 @@ class ContactList extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Pago Clave BDV'),
-      ),
-      body: futureBuilder,
-    );
-  }
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: (){
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        Home()
+                ));
+              },
+                ),
+              ),
+              body: futureBuilder,
+            );
+          }
   Widget createListView(BuildContext context, AsyncSnapshot snapshot) {
     List<ContactModel> values = snapshot.data;
-    print(values);
     List<ContactItem> _buildContactList(){
 
       return values
