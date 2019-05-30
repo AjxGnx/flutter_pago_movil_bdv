@@ -9,6 +9,10 @@ List<DropdownMenuItem> listCodeBank = [
     value: '0105',
   ),
   DropdownMenuItem(
+    child: Text('BANCO PROVINCIAL'),
+    value: '0108',
+  ),
+  DropdownMenuItem(
     child: Text('BANCO OCCIDENTAL DE DESCUENTO'),
     value: '0116',
   ),
