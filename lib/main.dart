@@ -13,6 +13,9 @@ void main() {
 }
 
 class Home extends StatefulWidget {
+  Map<String,String> data;
+  Home({this.data});
+
   @override
   _HomeState createState() => _HomeState();
 }
@@ -32,6 +35,16 @@ class _HomeState extends State<Home> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final _formKey = GlobalKey<FormState>();
 
+  @override
+  void initState() {
+    if(widget.data != null){
+      _codeBank = widget.data['codeBank'];
+      _codeMobile = widget.data['codeMobile'];
+      _dniController.text = widget.data['dni'];
+      _mobileController.text = widget.data['mobile'];
+    }
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     double _screenAncho = MediaQuery.of(context).size.width;
@@ -170,14 +183,14 @@ class _HomeState extends State<Home> {
                                       BorderRadius.all(Radius.circular(10))),
                             ),
                           )),
-                      Container(
+                      widget.data == null?  Container(
                         child: CheckboxListTile(
                           value: _chexbox,
                           onChanged: _valueChanged,
                           title: new Text('Agregar a pagos frecuentes?'),
                           activeColor: Colors.red,
                         ),
-                      ),
+                      ): Text(''),
                       Container(
                         width: 120,
                         height: 60,
