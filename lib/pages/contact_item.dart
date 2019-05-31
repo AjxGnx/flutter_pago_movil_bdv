@@ -9,15 +9,15 @@ class ContactItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       onTap: (){
-        print(_contact.name);
+        print(_contact.toMap());
       },
       leading: CircleAvatar(
         backgroundColor: Colors.redAccent,
         foregroundColor: Colors.white,
-        child: Text(_contact.name[0]),
+        child: Text(_contact.name[0].toUpperCase()),
       ),
-      title: Text(_contact.name),
-      subtitle: Text(_contact.codeBank+'  '+ _contact.phone+'  '+ _contact.dni),
+      title: Text(_contact.name[0].toUpperCase()+''+_contact.name.substring(1)),
+      subtitle: Text(_contact.codeBank + '  '+ _contact.codeMobile+_contact.mobile+ '  '+ _contact.dni),
     );
   }
 }
