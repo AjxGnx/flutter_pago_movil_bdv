@@ -1,17 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:pago_movil_bdv/data/bank_code.dart';
 import 'package:pago_movil_bdv/data/mobile_code.dart';
 import 'package:pago_movil_bdv/pages/add_name_contact.dart';
 import 'package:pago_movil_bdv/pages/contact_list.dart';
 import 'package:pago_movil_bdv/utils/delete_contact.dart';
-import 'package:pago_movil_bdv/utils/list_contact.dart';
 
 void main() {
-  runApp(
-      MaterialApp(
-          theme: ThemeData(primaryColor: Colors.redAccent), home: Home())
-  );
+  runApp(MaterialApp(
+      theme: ThemeData(primaryColor: Colors.redAccent), home: Home()));
 }
 
 class Home extends StatefulWidget {
@@ -34,23 +32,27 @@ class _HomeState extends State<Home> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final _formKey = GlobalKey<FormState>();
 
-
-
   @override
   Widget build(BuildContext context) {
-    double _screenAncho = MediaQuery
-        .of(context)
-        .size
-        .width;
-    double _screenAlto = MediaQuery
-        .of(context)
-        .size
-        .height;
+    double _screenAncho = MediaQuery.of(context).size.width;
+    double _screenAlto = MediaQuery.of(context).size.height;
     return Scaffold(
-      key: _scaffoldKey,
+        key: _scaffoldKey,
         appBar: AppBar(
           automaticallyImplyLeading: false,
           title: Text('Pago Clave BDV'),
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(
+                Icons.contacts,
+                color: Colors.white,
+              ),
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => ContactList()));
+              },
+            )
+          ],
         ),
         body: ListView(
           children: <Widget>[
@@ -62,48 +64,29 @@ class _HomeState extends State<Home> {
                   child: Column(
                     children: <Widget>[
                       Container(
-                        padding: EdgeInsets.only(bottom: 20),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Container(
-                                padding: EdgeInsets.only(left: 10),
-                                width: _screenAncho/1.25,
-                                child: TextFormField(
-                                  validator: (value) {
-                                    if (value.isEmpty) {
-                                      return 'Completa este campo';
-                                    }
-                                  },
-                                  decoration: InputDecoration(
-                                    labelText: 'Cedula',
-                                    border: OutlineInputBorder(
-                                        borderRadius:
-                                        BorderRadius.all(Radius.circular(10))),
-                                  ),
-                                  controller: _dniController,
-                                )),
-                            Container(
-                              padding: EdgeInsets.only(right: 10,left: 22),
-                              child: IconButton(
-                                icon: Icon(
-                                  Icons.contacts,
-                                  color: Colors.redAccent,
-                                ),
-                                onPressed: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              ContactList()
-                                          ));
-                                },
-                              ),
-                            )
-                          ],
+                        padding: EdgeInsets.only(left: 10, bottom: 20, right: 10),
+                        child: DropdownButtonHideUnderline(
+                          child: DropdownButtonFormField(
+                              decoration: InputDecoration(
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10)))),
+                              value: _codeBank,
+                              items: listCodeBank,
+                              hint: Text('Banco Receptor'),
+                              onChanged: (value) {
+                                _codeBank = value;
+                                setState(() {});
+                              },
+                              validator: (value) {
+                                if (value == null) {
+                                  return 'Completa este campo';
+                                }
+                              }),
                         ),
                       ),
                       Container(
+                        padding: EdgeInsets.only(bottom: 20),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
@@ -116,22 +99,20 @@ class _HomeState extends State<Home> {
                                     child: DropdownButtonFormField(
                                       decoration: InputDecoration(
                                           border: OutlineInputBorder(
-                                              borderRadius:
-                                              BorderRadius.all(Radius.circular(10)))
-                                      ),
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(10)))),
                                       value: _codeMobile,
                                       items: listCodeMobile,
                                       hint: Text('Prefijo'),
                                       onChanged: (value) {
                                         _codeMobile = value;
-                                        setState(() {
-                                        });
+                                        setState(() {});
                                       },
-                                      validator: (value){
-                                      if (value == null) {
-                                        return 'Completa este campo';
-                                      }
-                                    } ,
+                                      validator: (value) {
+                                        if (value == null) {
+                                          return 'Completa este campo';
+                                        }
+                                      },
                                     ),
                                   ),
                                 )),
@@ -147,8 +128,8 @@ class _HomeState extends State<Home> {
                                 decoration: InputDecoration(
                                   labelText: 'Numero celular',
                                   border: OutlineInputBorder(
-                                      borderRadius:
-                                      BorderRadius.all(Radius.circular(10))),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10))),
                                 ),
                                 controller: _mobileController,
                               ),
@@ -156,32 +137,26 @@ class _HomeState extends State<Home> {
                           ],
                         ),
                       ),
-                  Container(
-                    padding: EdgeInsets.only(left: 10,top: 20,right: 10),
-                    child: DropdownButtonHideUnderline(
-                      child: DropdownButtonFormField(
-                        decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                                borderRadius:
-                                BorderRadius.all(Radius.circular(10)))
-                        ),
-                        value: _codeBank,
-                        items: listCodeBank,
-                        hint: Text('Banco Receptor'),
-                        onChanged: (value) {
-                          _codeBank = value;
-                          setState(() {});
-                        },
-                        validator: (value){
-                          if (value == null) {
-                            return 'Completa este campo';
-                          }
-                        }
-                      ),
-                    ),
-                  ),
                       Container(
-                          padding: EdgeInsets.only(left: 10, right: 10, top: 20),
+                          padding:
+                          EdgeInsets.only(left: 10, right: 10, bottom: 20),
+                          child: TextFormField(
+                            validator: (value) {
+                              if (value.isEmpty) {
+                                return 'Completa este campo';
+                              }
+                            },
+                            decoration: InputDecoration(
+                              labelText: 'Cedula',
+                              border: OutlineInputBorder(
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(10))),
+                            ),
+                            controller: _dniController,
+                          )),
+                      Container(
+                          padding:
+                              EdgeInsets.only(left: 10, right: 10, bottom: 20),
                           child: TextFormField(
                             validator: (value) {
                               if (value.isEmpty) {
@@ -192,7 +167,7 @@ class _HomeState extends State<Home> {
                               labelText: 'Monto',
                               border: OutlineInputBorder(
                                   borderRadius:
-                                  BorderRadius.all(Radius.circular(10))),
+                                      BorderRadius.all(Radius.circular(10))),
                             ),
                           )),
                       Container(
@@ -216,22 +191,24 @@ class _HomeState extends State<Home> {
                               style: TextStyle(color: Colors.white),
                             ),
                             onPressed: () {
-                            if (_formKey.currentState.validate()) {
-                              if (_chexbox == true) {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            AddNameContact({
-                                              'codeBank': _codeBank,
-                                              'codeMobile': _codeMobile,
-                                              'mobile': _mobileController.text,
-                                              'dni': _dniController.text,
-                                            })));
-                              }else{
-                                _scaffoldKey.currentState.showSnackBar(snackBar);
+                              if (_formKey.currentState.validate()) {
+                                if (_chexbox == true) {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => AddNameContact({
+                                                'codeBank': _codeBank,
+                                                'codeMobile': _codeMobile,
+                                                'mobile':
+                                                    _mobileController.text,
+                                                'dni': _dniController.text,
+                                              })));
+                                } else {
+                                  _scaffoldKey.currentState
+                                      .showSnackBar(snackBar);
+                                }
                               }
-                            }},
+                            },
                           ),
                         ),
                       )
