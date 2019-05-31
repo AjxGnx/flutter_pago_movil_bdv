@@ -7,7 +7,8 @@ Future<void> save_contact({String codeBank, String codeMobile, String mobile, St
   await db.create().then((dd){
     ContactModel contact = new ContactModel();
     contact.name = name;
-    contact.phone = '$codeMobile$mobile';
+    contact.codeMobile = codeMobile;
+    contact.mobile = mobile;
     contact.codeBank = codeBank;
     contact.dni= dni;
 

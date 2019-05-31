@@ -24,7 +24,8 @@ class DatabaseClient {
             CREATE TABLE contact (
               id INTEGER PRIMARY KEY, 
               name TEXT NOT NULL,
-              phone TEXT NOT NULL,
+              codeMobile TEXT NOT NULL,
+              mobile TEXT NOT NULL,
               codeBank TEXT NOT NULL,
               dni TEXT NOT NULL
             )""");
@@ -42,6 +43,7 @@ class DatabaseClient {
   }
 
   Future<List<ContactModel>> getContact() async {
+    print(getApplicationDocumentsDirectory().toString());
     List<Map> results = await _db.query("contact", columns: ContactModel.columns, orderBy: "id DESC");
 
     List<ContactModel> contacts = new List();
@@ -59,4 +61,5 @@ class DatabaseClient {
   }
 
 }
+
 

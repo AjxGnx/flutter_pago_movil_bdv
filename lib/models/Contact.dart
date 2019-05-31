@@ -3,16 +3,18 @@ class ContactModel{
 
   int id;
   String name;
-  String phone;
+  String codeMobile;
+  String mobile;
   String codeBank;
   String dni;
 
-  static final columns = ["id", "name","phone","codeBank","dni"];
+  static final columns = ["id", "name","codeMobile","mobile","codeBank","dni"];
 
   Map<String, dynamic> toMap() {
     Map<String, dynamic>  map = {
       "name": name,
-      "phone": phone,
+      "codeMobile": codeMobile,
+      "mobile": mobile,
       "codeBank": codeBank,
       "dni": dni,
     };
@@ -28,7 +30,8 @@ class ContactModel{
     ContactModel contact = new ContactModel();
     contact.id = map["id"];
     contact.name = map["name"];
-    contact.phone = map["phone"];
+    contact.codeMobile = map["codeMobile"];
+    contact.mobile = map["mobile"];
     contact.codeBank = map["codeBank"];
     contact.dni = map["dni"];
 
