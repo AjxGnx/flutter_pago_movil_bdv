@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:pago_movil_bdv/utils/save_contact.dart';
-import 'package:pago_movil_bdv/utils/list_contact.dart';
 import 'package:pago_movil_bdv/pages/contact_list.dart';
 
 
@@ -64,7 +63,7 @@ class _AddNameContactState extends State<AddNameContact> {
                               context,
                               MaterialPageRoute(
                                   builder: (context) =>
-                                      ContactList()
+                                      ContactList(save: true)
                               ));
                         }},
                     ),
