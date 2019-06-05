@@ -8,7 +8,9 @@ class ContactList extends StatefulWidget {
 
 
   bool save;
-  ContactList({this.save: false});
+  bool delete;
+  bool update;
+  ContactList({this.save: false,this.delete: false, this.update:false});
 
   @override
   _ContactListState createState() => _ContactListState();
@@ -24,16 +26,31 @@ class _ContactListState extends State<ContactList> {
     );
   }
 
-  final snackbar = SnackBar(
+  final snackBarSave = SnackBar(
     content: Text('Contacto Guardado con exito'),
+    duration: Duration(seconds: 5),
+  );
+  final snackBarDelete = SnackBar(
+    content: Text('Contacto Eliminado con exito'),
+    duration: Duration(seconds: 5),
+  );
+  final snackBarUpdate = SnackBar(
+    content: Text('Contacto Editado con exito'),
     duration: Duration(seconds: 5),
   );
    GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   void showSnack() {
     if(widget.save){
-      _scaffoldKey.currentState.showSnackBar(snackbar);
-  }}
+      _scaffoldKey.currentState.showSnackBar(snackBarSave);
+  }
+    if(widget.delete){
+      _scaffoldKey.currentState.showSnackBar(snackBarDelete);
+    }
+    if(widget.update){
+      _scaffoldKey.currentState.showSnackBar(snackBarUpdate);
+    }
+  }
 
 
 
