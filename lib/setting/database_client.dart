@@ -60,7 +60,6 @@ class DatabaseClient {
   }
 
   Future<int> updateContact(ContactModel contact) async {
-    print(contact.id);
     return await _db.update("contact", contact.toMap(), where: "id = ?", whereArgs: [contact.id]);
   }
 
