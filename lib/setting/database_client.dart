@@ -55,8 +55,13 @@ class DatabaseClient {
     return contacts;
   }
 
-  Future<int> deleteContact() async {
-    return await _db.rawDelete('DELETE FROM contact');
+  Future<int> deleteContact(int id) async {
+    return await _db.rawDelete('DELETE FROM contact WHERE id=$id');
+  }
+
+  Future<int> updateContact(ContactModel contact) async {
+    print(contact.id);
+    return await _db.update("contact", contact.toMap(), where: "id = ?", whereArgs: [contact.id]);
   }
 
 }
