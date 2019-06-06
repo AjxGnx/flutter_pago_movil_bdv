@@ -58,10 +58,11 @@ class _UpdateContactState extends State<UpdateContact> {
                 child: Column(
                   children: <Widget>[
                     Container(
-                      padding: EdgeInsets.only(left: 10, bottom: 20, right: 10),
+                      padding: EdgeInsets.only(left: 7, bottom: 20, right: 7),
                       child: DropdownButtonHideUnderline(
                         child: DropdownButtonFormField(
                             decoration: InputDecoration(
+                                contentPadding: EdgeInsets.only(left: 8,bottom: 20,top: 20),
                                 border: OutlineInputBorder(
                                     borderRadius: BorderRadius.all(
                                         Radius.circular(10)))),
@@ -78,40 +79,38 @@ class _UpdateContactState extends State<UpdateContact> {
                               }
                             }),
                       ),
-                    ),
-                    Container(
+                    ),Container(
                       padding: EdgeInsets.only(bottom: 20),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Container(
-                              padding: EdgeInsets.only(left: 5, right: 14),
-                              child: Container(
-                                width: _screenAncho / 2.1,
-                                padding: EdgeInsets.only(left: 5),
-                                child: DropdownButtonHideUnderline(
-                                  child: DropdownButtonFormField(
-                                    decoration: InputDecoration(
-                                        border: OutlineInputBorder(
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(10)))),
-                                    value: _codeMobile,
-                                    items: listCodeMobile,
-                                    hint: Text('Prefijo'),
-                                    onChanged: (value) {
-                                      _codeMobile = value;
-                                      setState(() {});
-                                    },
-                                    validator: (value) {
-                                      if (value == null) {
-                                        return 'Completa este campo';
-                                      }
-                                    },
-                                  ),
-                                ),
-                              )),
+                            width: _screenAncho / 2.1,
+                            child: DropdownButtonHideUnderline(
+                              child: DropdownButtonFormField(
+                                decoration: InputDecoration(
+                                    border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10)))),
+                                value: _codeMobile,
+                                items: listCodeMobile,
+                                hint: Text('Prefijo'),
+                                onChanged: (value) {
+                                  _codeMobile = value;
+                                  setState(() {});
+                                },
+                                validator: (value) {
+                                  if (value == null) {
+                                    return 'Completa este campo';
+                                  }
+                                },
+                              ),
+                            ),
+                          ),
                           Container(
-                            padding: EdgeInsets.only(right: 10),
+                            width: _screenAncho/64,
+                          ),
+                          Container(
                             width: _screenAncho / 2.1,
                             child: TextFormField(
                               validator: (value) {
