@@ -77,10 +77,11 @@ class _HomeState extends State<Home> {
                   child: Column(
                     children: <Widget>[
                       Container(
-                        padding: EdgeInsets.only(left: 10, bottom: 20, right: 10),
+                        padding: EdgeInsets.only(left: 7, bottom: 20, right: 7),
                         child: DropdownButtonHideUnderline(
                           child: DropdownButtonFormField(
                               decoration: InputDecoration(
+                                contentPadding: EdgeInsets.only(left: 8,bottom: 20,top: 20),
                                   border: OutlineInputBorder(
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(10)))),
@@ -104,13 +105,11 @@ class _HomeState extends State<Home> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             Container(
-                                padding: EdgeInsets.only(left: 5, right: 14),
-                                child: Container(
                                   width: _screenAncho / 2.1,
-                                  padding: EdgeInsets.only(left: 5),
                                   child: DropdownButtonHideUnderline(
                                     child: DropdownButtonFormField(
                                       decoration: InputDecoration(
+                                          contentPadding: EdgeInsets.only(left: 8,bottom: 20,top: 20),
                                           border: OutlineInputBorder(
                                               borderRadius: BorderRadius.all(
                                                   Radius.circular(10)))),
@@ -128,9 +127,11 @@ class _HomeState extends State<Home> {
                                       },
                                     ),
                                   ),
-                                )),
+                                ),
                             Container(
-                              padding: EdgeInsets.only(right: 10),
+                              width: _screenAncho/64,
+                            ),
+                            Container(
                               width: _screenAncho / 2.1,
                               child: TextFormField(
                                 validator: (value) {
@@ -152,7 +153,7 @@ class _HomeState extends State<Home> {
                       ),
                       Container(
                           padding:
-                          EdgeInsets.only(left: 10, right: 10, bottom: 20),
+                          EdgeInsets.only(left: 7, right: 7, bottom: 20),
                           child: TextFormField(
                             validator: (value) {
                               if (value.isEmpty) {
@@ -169,7 +170,7 @@ class _HomeState extends State<Home> {
                           )),
                       Container(
                           padding:
-                              EdgeInsets.only(left: 10, right: 10, bottom: 20),
+                              EdgeInsets.only(left: 7, right: 7, bottom: 20),
                           child: TextFormField(
                             validator: (value) {
                               if (value.isEmpty) {
