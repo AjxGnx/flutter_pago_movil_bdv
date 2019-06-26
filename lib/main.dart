@@ -38,6 +38,10 @@ class _HomeState extends State<Home> {
     content: Text('Ocurrio un problema al enviar su mensaje'),
     duration: Duration(seconds: 5),
   );
+  final snackBarSent = SnackBar(
+    content: Text('Mensaje Enviado con Exito'),
+    duration: Duration(seconds: 3),
+  );
 
   void _valueChanged(bool value) => setState(() => _chexbox = value);
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -265,7 +269,7 @@ class _HomeState extends State<Home> {
                                             _loading = true;
                                           });
                                         } else if (state ==
-                                            SmsMessageState.Delivered) {
+                                            SmsMessageState.Sent) {
                                           setState(() {
                                             _loading = false;
                                             _codeBank = null;
@@ -275,7 +279,7 @@ class _HomeState extends State<Home> {
                                             _amountController.text = '';
                                           });
                                           _scaffoldKey.currentState
-                                              .showSnackBar(snackBar);
+                                              .showSnackBar(snackBarSent);
                                         } else if (state ==
                                             SmsMessageState.Fail) {
                                           setState(() {
