@@ -19,7 +19,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_sms: ^0.0.3
+  sms: ^0.2.0
   sqflite: any
   path_provider: any
 
