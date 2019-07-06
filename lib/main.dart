@@ -242,34 +242,40 @@ class _HomeState extends State<Home> {
                                 ),
                                 onPressed: () {
                                   if (_formKey.currentState.validate()) {
-                                    if (_chexbox == true) {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  AddNameContact({
-                                                    'codeBank': _codeBank,
-                                                    'codeMobile': _codeMobile,
-                                                    'mobile':
-                                                        _mobileController.text,
-                                                    'dni': _dniController.text,
-                                                  })));
-                                    } else {
-                                      SmsSender sender = new SmsSender();
-                                      SmsMessage message = SmsMessage(
-                                          '2662',
-                                          'PAGAR ' +
-                                              '$_codeBank' +
-                                              ' ${_codeMobile + _mobileController.text}' +
-                                              ' ${_dniController.text}' +
-                                              ' ${_amountController.text + ',00'}');
-                                      message.onStateChanged.listen((state) {
-                                        if (state == SmsMessageState.Sending) {
-                                          setState(() {
-                                            _loading = true;
-                                          });
-                                        } else if (state ==
-                                            SmsMessageState.Sent) {
+                                    SmsSender sender = new SmsSender();
+                                    SmsMessage message = SmsMessage(
+                                        '2662',
+                                        'PAGAR ' +
+                                            '$_codeBank' +
+                                            ' ${_codeMobile + _mobileController.text}' +
+                                            ' ${_dniController.text}' +
+                                            ' ${_amountController.text + ',00'}');
+                                    message.onStateChanged.listen((state) {
+                                      if (state == SmsMessageState.Sending) {
+                                        setState(() {
+                                          _loading = true;
+                                        });
+                                      } else if (state ==
+                                          SmsMessageState.Sent) {
+                                        _scaffoldKey.currentState
+                                            .showSnackBar(snackBarSent);
+                                        if (_chexbox == true) {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      AddNameContact({
+                                                        'sms': 'true',
+                                                        'codeBank': _codeBank,
+                                                        'codeMobile':
+                                                            _codeMobile,
+                                                        'mobile':
+                                                            _mobileController
+                                                                .text,
+                                                        'dni':
+                                                            _dniController.text,
+                                                      })));
+                                        } else {
                                           setState(() {
                                             _loading = false;
                                             _codeBank = null;
@@ -278,19 +284,17 @@ class _HomeState extends State<Home> {
                                             _dniController.text = '';
                                             _amountController.text = '';
                                           });
-                                          _scaffoldKey.currentState
-                                              .showSnackBar(snackBarSent);
-                                        } else if (state ==
-                                            SmsMessageState.Fail) {
-                                          setState(() {
-                                            _loading = false;
-                                          });
-                                          _scaffoldKey.currentState
-                                              .showSnackBar(snackBarFail);
                                         }
-                                      });
-                                      sender.sendSms(message);
-                                    }
+                                      } else if (state ==
+                                          SmsMessageState.Fail) {
+                                        setState(() {
+                                          _loading = false;
+                                        });
+                                        _scaffoldKey.currentState
+                                            .showSnackBar(snackBarFail);
+                                      }
+                                    });
+                                    sender.sendSms(message);
                                   }
                                 },
                               ),
